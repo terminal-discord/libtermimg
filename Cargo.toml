@@ -1,0 +1,8 @@
+[package]
+name = "libtermimg"
+version = "0.1.0"
+authors = ["Noskcaj <kcajdev@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+image = {version = "0.22.1", default-features = false }
