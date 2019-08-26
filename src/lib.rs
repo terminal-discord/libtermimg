@@ -3,7 +3,7 @@ mod utils;
 
 use image::{GenericImage, GenericImageView, Rgba};
 
-pub use utils::{rgb_to_ansi, Block, Rgb};
+pub use utils::{resize_image, rgb_to_ansi, Block, Rgb};
 
 fn process_block(
     sub_img: &impl GenericImage<Pixel = Rgba<u8>>,
