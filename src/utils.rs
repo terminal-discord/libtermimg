@@ -1,4 +1,5 @@
-use image::{DynamicImage, FilterType, GenericImageView, Rgba};
+use image::imageops::FilterType;
+use image::{DynamicImage, GenericImageView, Rgba};
 
 pub struct Rgb(pub u8, pub u8, pub u8);
 pub struct AnsiValue(pub u8);
