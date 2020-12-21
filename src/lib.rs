@@ -1,12 +1,12 @@
 mod blocks;
 mod utils;
 
-use image::{GenericImage, GenericImageView, Rgba};
+use image::{GenericImageView, Rgba};
 
 pub use utils::{resize_image, rgb_to_ansi, Block, Rgb};
 
 fn process_block(
-    sub_img: &impl GenericImage<Pixel = Rgba<u8>>,
+    sub_img: &impl GenericImageView<Pixel = Rgba<u8>>,
     bitmaps: &[(u32, char)],
     blend: bool,
 ) -> Block {
@@ -116,7 +116,7 @@ fn process_block(
     }
 }
 
-pub fn render(mut img: image::DynamicImage, blend: bool, style: u32) -> Vec<Vec<Block>> {
+pub fn render(img: &image::DynamicImage, blend: bool, style: u32) -> Vec<Vec<Block>> {
     let bitmap = match style {
         1 => blocks::BITMAPS_NO_SLOPES,
         2 => blocks::BITMAPS_BLOCKS,
@@ -129,7 +129,7 @@ pub fn render(mut img: image::DynamicImage, blend: bool, style: u32) -> Vec<Vec<
     for y in (0..img.height()).step_by(8) {
         let mut row = Vec::with_capacity(img.width() as usize / 4);
         for x in (0..img.width()).step_by(4) {
-            let sub_img = img.sub_image(x, y, 4, 8);
+            let sub_img = img.view(x, y, 4, 8);
             let block = process_block(&sub_img, bitmap, blend);
             row.push(block);
         }
